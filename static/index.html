@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>IA de programación local</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="brand-mark" aria-hidden="true">&lt;/&gt;</div>
+        <p class="eyebrow">Tu asistente de programación</p>
+        <h1>Construye algo genial.</h1>
+        <p class="intro">Pide código nuevo o comparte el tuyo para recibir ayuda. Tus consultas se procesan con un modelo local.</p>
+      </header>
+
+      <section class="workspace" aria-label="Asistente de programación">
+        <form id="assistant-form">
+          <div class="form-row">
+            <fieldset class="mode-picker">
+              <legend>¿Qué necesitas?</legend>
+              <label class="mode-option">
+                <input type="radio" name="mode" value="generate" checked>
+                <span>Generar código</span>
+              </label>
+              <label class="mode-option">
+                <input type="radio" name="mode" value="fix">
+                <span>Corregir código</span>
+              </label>
+            </fieldset>
+            <label class="language-field" for="language">
+              <span>Lenguaje</span>
+              <select id="language" name="language">
+                <option>Python</option>
+                <option>JavaScript</option>
+                <option>TypeScript</option>
+                <option>Java</option>
+                <option>C#</option>
+                <option>C++</option>
+                <option>Go</option>
+                <option>Rust</option>
+                <option>Otro</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field-label" for="prompt">Cuéntame qué quieres hacer</label>
+          <textarea id="prompt" name="prompt" maxlength="4000" rows="4" placeholder="Por ejemplo: crea una función que ordene una lista de tareas por fecha..." required></textarea>
+
+          <div id="code-field" class="code-field" hidden>
+            <label class="field-label" for="code">Tu código</label>
+            <textarea id="code" name="code" maxlength="16000" rows="8" placeholder="Pega aquí el código que quieres revisar..."></textarea>
+          </div>
+
+          <div class="submit-row">
+            <p class="privacy-note"><span aria-hidden="true">●</span> El modelo se ejecuta en tu equipo</p>
+            <button id="submit-button" type="submit">
+              <span id="button-label">Generar código</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </form>
+
+        <section id="result-panel" class="result-panel" aria-labelledby="result-title" hidden>
+          <div class="result-heading">
+            <div>
+              <p class="eyebrow">Respuesta del modelo</p>
+              <h2 id="result-title">Tu solución</h2>
+            </div>
+            <button id="copy-button" class="copy-button" type="button">Copiar</button>
+          </div>
+          <pre id="result" tabindex="0"></pre>
+        </section>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <footer>
+        <span>Impulsado por Ollama</span>
+        <span>El código generado no se ejecuta automáticamente.</span>
+      </footer>
+    </main>
+  </body>
+</html>
